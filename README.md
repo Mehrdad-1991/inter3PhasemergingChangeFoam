@@ -21,6 +21,7 @@ This updated solver was developed by M.Sc. Mehrdad Kazemi under the supervision 
 Universität Rostock
 Fakultät für Maschinenbau und Schiffstechnik
 Lehrstuhl für Modellierung und Simulation
+Mehrdad Kazemi
 Albert-Einstein-Str. 2
 18059 Rostock, Deutschland
 
