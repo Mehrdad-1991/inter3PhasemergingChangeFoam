@@ -1,0 +1,6 @@
+SOURCE = \
+incompressibleThreePhaseMixture/incompressibleThreePhaseMixture.C \
+threePhaseInterfaceProperties/threePhaseInterfaceProperties.C \
+inter3PhaseChangeFoam.C \
+
+# sources

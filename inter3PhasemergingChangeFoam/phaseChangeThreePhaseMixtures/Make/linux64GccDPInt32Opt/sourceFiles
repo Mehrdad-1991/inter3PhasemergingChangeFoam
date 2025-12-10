@@ -1,0 +1,6 @@
+SOURCE = \
+phaseChangeThreePhaseMixture/phaseChangeThreePhaseMixture.C \
+phaseChangeThreePhaseMixture/phaseChangeThreePhaseMixtureNew.C \
+SchnerrSauer3/SchnerrSauer3.C \
+
+# sources

@@ -1,0 +1,24 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+# Parse arguments for library compilation
+. $WM_PROJECT_DIR/wmake/scripts/AllwmakeParseArguments
+#------------------------------------------------------------------------------
+# Define the log file
+LOGFILE="debug.log"
+
+# Add a timestamp to the log file
+echo "Build started at $(date)" > "$LOGFILE"
+# Run the commands and append their outputs to the log file
+{
+	echo "Running wmake $targetType phaseChangeThreePhaseMixtures"
+	wmake $targetType phaseChangeThreePhaseMixtures
+	echo
+
+	echo "Running wmake $targetType"
+	wmake $targetType
+	echo
+} >> "$LOGFILE" 2>&1  # Redirect both stdout and stderr to the log file
+
+# Add a timestamp indicating completion
+echo "Build completed at $(date)" >> "$LOGFILE"
+#------------------------------------------------------------------------------
