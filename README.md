@@ -2,7 +2,7 @@
 OpenFoam Solver
 
 About the Solver (August 2025)
-inter3PhasemergingChangeFoam is a customized three-phase solver developed for simulating incompressible, phase-changing flows involving three immiscible fluids. It is built upon a dedicated library structure under phaseChangeThreePhaseMixtures, which includes:
+inter3PhasemergingChangeFoam  (V1.2) is a customized three-phase solver developed for simulating incompressible, phase-changing flows involving three immiscible fluids. It is built upon a dedicated library structure under phaseChangeThreePhaseMixtures, which includes:
 
 incompressibleThreePhaseMixture
 
