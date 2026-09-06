@@ -1,0 +1,74 @@
+#!/bin/bash
+set -e
+
+# --- User options ---
+PARALLEL_RUN=true
+nSubDomains=10
+
+# Run from this directory
+cd "${0%/*}" || exit 1
+
+# ---- Source OpenFOAM environment safely ----
+# If OpenFOAM environment is already loaded, avoid re-sourcing.
+if [ -z "${WM_PROJECT_DIR:-}" ]; then
+    set +e
+    # Adjust this path if your OpenFOAM installation differs:
+    . /usr/lib/openfoam/openfoam2406/etc/bashrc
+    set -e
+fi
+
+# Source OpenFOAM helper functions
+set +e
+. "$WM_PROJECT_DIR/bin/tools/RunFunctions"
+set -e
+
+# ---- Ensure mesh exists ----
+if [ ! -d "constant/polyMesh" ]; then
+
+    if [ -f "mesh/polyMesh.tar.gz" ]; then
+        echo "Extracting mesh: mesh/polyMesh.tar.gz -> constant/polyMesh ..."
+        mkdir -p constant
+        tar -C constant -xzf mesh/polyMesh.tar.gz
+
+    elif [ -f "mesh/polyMesh.zip" ]; then
+        echo "Extracting mesh: mesh/polyMesh.zip -> constant/polyMesh ..."
+        mkdir -p constant
+        rm -rf constant/polyMesh
+        unzip -q mesh/polyMesh.zip -d constant
+
+        # If the zip extracts files directly into constant/, move them into constant/polyMesh/
+        if [ ! -d "constant/polyMesh" ]; then
+            mkdir -p constant/polyMesh
+            mv constant/boundary constant/faces constant/neighbour constant/owner constant/points constant/polyMesh/ 2>/dev/null || true
+        fi
+
+    elif [ -d "mesh/polyMesh" ]; then
+        echo "Copying mesh: ./mesh/polyMesh -> constant/polyMesh ..."
+        mkdir -p constant
+        cp -r mesh/polyMesh constant/
+
+    else
+        echo "ERROR: Missing mesh. Provide one of:"
+        echo "  constant/polyMesh"
+        echo "  mesh/polyMesh.tar.gz"
+        echo "  mesh/polyMesh.zip"
+        echo "  mesh/polyMesh"
+        exit 2
+    fi
+fi
+
+# ---- Preprocessing ----
+restore0Dir
+
+APP=$(getApplication)
+
+# ---- Run solver ----
+if [ "$PARALLEL_RUN" = true ]; then
+    echo "Running in PARALLEL with $nSubDomains subdomains"
+    runApplication decomposePar
+    mpirun -np "$nSubDomains" "$APP" -parallel
+    runApplication reconstructPar
+else
+    echo "Running in SERIAL"
+    runApplication "$APP"
+fi

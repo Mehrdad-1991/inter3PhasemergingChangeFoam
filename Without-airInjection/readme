@@ -1,0 +1,31 @@
+Run
+
+    Set options in Allrun:
+
+    PARALLEL_RUN=true   # or false
+    nSubDomains=10      # number of cores
+
+
+    Execute:
+
+    ./Allrun
+
+
+    Serial mode: runs solver directly.
+
+    Parallel mode: copies mesh, runs decomposePar, solver with MPI, and reconstructPar.
+
+Clean
+
+    To remove results and reset the case:
+
+    ./Allclean
+
+
+    Deletes 0/, processor*/, postProcessing/, and restores mesh from mesh/.
+
+Notes
+
+    Make sure mesh/polyMesh/ exists before running.
+
+    Adjust solver and settings in system/ and constant/ as needed.

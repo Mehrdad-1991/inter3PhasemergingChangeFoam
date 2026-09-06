@@ -1,0 +1,123 @@
+// ************************************************************************* //
+
+
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+libs
+(
+
+);
+
+application     inter3PhasemergingChangeFoam; //inter3PhasemergingChangeDyMFoam with dynamic mesh option
+
+startFrom       latestTime; //latestTime //startTime
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         0.1;  
+
+deltaT          5.0e-5; 
+
+writeControl    adjustableRunTime; //timeStep; //adjustableRunTime
+
+writeInterval   1.0e-03; 
+
+purgeWrite      10; //0
+
+writeFormat     ascii;
+
+writePrecision  9;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   9;
+
+runTimeModifiable true;
+
+adjustTimeStep false;
+
+maxDeltaT       1.0e-3;
+maxCo           10.0;
+maxAlphaCo      10.0;
+
+functions
+{
+ 
+    #include "forces"
+    #include "forceCoeffs"
+    #include "fieldAverage"
+    #include "pointprobing"
+     
+    Q1
+    {
+        type			Q;
+        libs			(fieldFunctionObjects);
+        writeControl    writeTime;
+        timeStart		0.01;       
+    };   
+    
+    solverInfo
+    {
+	type            solverInfo;
+	libs            ("libutilityFunctionObjects.so");
+	fields          (U p);
+	writeControl    writeTime;
+    };
+    
+    yPlus
+    {
+        type            yPlus;
+        libs            (fieldFunctionObjects);
+        writeControl    writeTime;
+        timeStart       0.01;
+        
+	    // Optional (inherited) entries
+	    writePrecision  6;
+	    writeToFile     true;
+	    useUserTime     true;
+	    region          region0;
+	    enabled         true;
+	    log             true;
+	    executeControl  timeStep;
+	    executeInterval 1;
+	    writeControl    writeTime;
+	    writeInterval   -1;       
+        };            
+    
+    wallShearStress1
+    {   
+        type			wallShearStress;
+        libs			(fieldFunctionObjects);
+        enabled			true;
+        writeControl    writeTime; 
+        timeStart		0.01;
+    };
+       
+    turbulenceFields1
+    {
+	    type			turbulenceFields;
+	    libs			(fieldFunctionObjects);
+	    fields			(R); 
+	    writeControl    writeTime;
+	    timeStart		0.01;
+    };       
+}
+// ************************************************************************* //

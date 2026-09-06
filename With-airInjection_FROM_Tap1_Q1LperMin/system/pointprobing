@@ -1,0 +1,220 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      pointprobing;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //  
+
+    //probes are for Energy Spectrum            
+    tap1
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0028 0.0022 0.035)
+        );
+    } 
+    //probes are for Energy Spectrum            
+    tap2
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0084 0.00355 0.035)
+        );
+    }  
+    
+    tap3
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0141 0.00390 0.035)
+        );
+    }  
+
+    tap4
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0198 0.00362 0.035)
+        );
+    }  
+    tap5
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0254 0.00295 0.035)
+        );
+    }  
+    tap6
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0311 0.00206 0.035)
+        );
+    }  
+    tap7
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0368 0.00085 0.035)
+        );
+    }  
+    tap8
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0424 -0.00055 0.035)
+        );
+    }  
+    tap9
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0481 -0.0022 0.035)
+        );
+    }  
+    tap10
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0538 -0.00395 0.035)
+        );
+    }  
+    tap11
+    {
+        type                 probes;
+        libs                 (sampling);	
+        writeControl         timeStep; //timeStep //writeTime
+        timeStart            0.01;	
+
+        fields
+        (
+        p
+	    U
+        );
+
+        probeLocations  // defien one or several positions
+        (
+            (0.0595 -0.00595 0.035)
+        );
+    }  
+// ************************************************************************* //
